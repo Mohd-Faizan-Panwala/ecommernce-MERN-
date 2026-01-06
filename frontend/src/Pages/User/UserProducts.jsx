@@ -41,9 +41,22 @@ export default function UserProducts() { //user can view products and place orde
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-600 via-purple-600 to-pink-500 px-6 py-10">
       <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between">
         <h1 className="text-3xl font-bold text-white mb-8">
           🛍️ Explore Products
         </h1>
+        <button
+          onClick={()=> navigate("/myorders")}
+          className="px-5 py-[-50px] h-10 rounded-lg bg-white/20 text-white backdrop-blur-md hover:bg-white/30 transition"
+        >
+          My Orders
+        </button>
+        <button
+          onClick={()=> navigate("/home")}
+          className="px-5 ml-[-600px] h-10 rounded-lg bg-white/20 text-white backdrop-blur-md hover:bg-white/30 transition"
+        > Home
+        </button >
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {products.map((product) => (           
@@ -73,10 +86,7 @@ export default function UserProducts() { //user can view products and place orde
                 disabled={product.isOutOfStock}
                   onClick={() => navigate("/orders", { state: { product } })}
                   className="w-full py-2 rounded-lg text-white font-semibold bg-linear-to-r from-indigo-600 to-purple-600 hover:from-purple-600 hover:to-pink-500 transition"
-                  >
-                      {product.isOutOfStock ? "Out of Stock" : "Order Now"}
-
-                {/* const navigate = useNavigate(); */}
+                  >{product.isOutOfStock ? "Out of Stock" : "Order Now"}
               </button>
             </div>
           ))}

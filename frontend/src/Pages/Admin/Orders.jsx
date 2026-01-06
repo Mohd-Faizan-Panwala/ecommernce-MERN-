@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 export default function AdminOrders() {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -91,6 +93,22 @@ export default function AdminOrders() {
         <h1 className="text-3xl font-bold text-white mb-8">
           📦 Manage Orders
         </h1>
+
+       <div className="flex pb-4 ">
+         <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="py-2 px-4 mr-5 rounded-md text-md font-semibold text-white bg-linear-to-r from-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-600 transition shadow-xl"
+          >
+             🏠︎ Home
+          </button>
+
+          <button
+            onClick={() => navigate("/admin/products")}
+            className="py-2 px-4 rounded-md text-md font-semibold text-white bg-linear-to-r from-emerald-600 to-teal-700 hover:from-teal-700 hover:to-emerald-600 transition shadow-xl"
+          >
+            🛍️ Manage Products
+          </button>
+       </div>
 
         {orders.length === 0 ? (
           <p className="text-gray-400">No orders received yet.</p>
