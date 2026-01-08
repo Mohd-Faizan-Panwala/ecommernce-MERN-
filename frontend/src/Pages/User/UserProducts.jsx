@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {useNavigate}  from "react-router-dom";
 import toast from "react-hot-toast";
 
-export default function UserProducts() {
+export default function UserProducts() { //user can view products and place orders
    const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
