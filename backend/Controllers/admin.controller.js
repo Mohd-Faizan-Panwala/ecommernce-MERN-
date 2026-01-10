@@ -1,7 +1,7 @@
 const Admin = require("../Models/Admin");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { setUser } = require("../Token/jwt");
+const { generateToken } = require("../Token/jwt");
 
 exports.adminSignup = async (req, res) => {
   try {
@@ -27,9 +27,14 @@ exports.adminSignup = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Admin created successfully",});
-    const token = setUser(admin)
-         res.json(token)
+      message: "Admin created successfully",
+        admin: {
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+      },
+    });
+
 
 
   } catch (error) {
@@ -49,15 +54,21 @@ exports.adminLogin = async (req, res) => {
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
+    
+const token = generateToken(admin._id, admin.role);
 
-    res.json({
+    console.log("LOGIN TOKEN GENERATED:", token);
+
+    return res.json({
       message: "Admin login successful",
-      // token:setUser(admin),
-    });
-    const token = setUser(admin)
-     console.log("user is",admin)
-     res.json(token)
-   
+      token,
+      admin: {
+        id: admin._id,
+        email: admin.email,
+        role: admin.role
+      }
+    })
+    // console.log("LOGIN TOKEN GENERATED:", token);   
 
   } catch (error) {
     res.status(500).json({ message: error.message });
