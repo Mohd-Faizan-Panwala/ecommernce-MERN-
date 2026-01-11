@@ -1,6 +1,6 @@
 const Order = require("../Models/Orders");
 const Product = require("../Models/Products");
-
+// order create update and delete 
 exports.createOrder = async (req, res) => {
   try {
     const userId = req.user._id;
