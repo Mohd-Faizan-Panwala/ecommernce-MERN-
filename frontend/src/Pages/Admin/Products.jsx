@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
-export default function AdminProducts() {//for admin side to add products so users can place orders
+export default function AdminProducts() {//for admin side to add products  users can place orders
   const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
