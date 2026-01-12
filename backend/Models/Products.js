@@ -27,6 +27,10 @@ const productSchema = new mongoose.Schema(
       ref: "User", // admin
       required: true,
     },
+      isOutOfStock: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

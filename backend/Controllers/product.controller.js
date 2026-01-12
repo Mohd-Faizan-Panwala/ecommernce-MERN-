@@ -75,3 +75,36 @@ exports.deleteProduct = async (req, res) => { //to delete the existing product f
     res.status(500).json({ message: error.message });
   }
 };
+
+
+exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find().sort({ createdAt: -1 });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.toggleStock = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    product.isOutOfStock = !product.isOutOfStock;
+    await product.save();
+
+    res.json({
+      message: `Product marked as ${
+        product.isOutOfStock ? "Out of Stock" : "In Stock"
+      }`,
+      product,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

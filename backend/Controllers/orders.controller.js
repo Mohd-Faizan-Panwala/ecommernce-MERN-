@@ -84,7 +84,7 @@ exports.updateOrderStatus = async (req, res) => {
     const allowedStatus = {
       pending: ["confirmed"],
       confirmed: ["shipped"],
-      shipped: ["out_for_delivery"],
+      shipped: ["out for delivery"],
       out_for_delivery: ["delivered"],
       delivered: [],
     };
@@ -102,6 +102,19 @@ exports.updateOrderStatus = async (req, res) => {
       message: "Order status updated successfully",
       order,
     });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.userOrders = async (req, res) =>{
+  try {
+    const orders = await Order.find({ user: req.user._id })
+      .populate("items.product", "name price image")
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

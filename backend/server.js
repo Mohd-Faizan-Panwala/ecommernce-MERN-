@@ -21,6 +21,8 @@ app.use("/api/test", require("./Routes/tes.route"));
 app.use("/api/orders", require("./Routes/order.routes"));
 app.use("/uploads", express.static("uploads"));
 app.use("/api/products", require("./Routes/product.route"));
+// app.use("/api/products", require("./Routes/product.route"));
+
 
 
 
