@@ -11,7 +11,7 @@ router.get("/",getAllProducts);//to render the orders in admin side
 router.post("/",auth,adminOnly,upload.single("image"),addProduct); //add product
 router.put("/:id",auth,adminOnly,upload.single("image"),updateProduct); //update the existing product
 router.delete("/:id", auth, adminOnly, deleteProduct);//delet the existing product from the db 
-router.patch("/:id/stock", auth, adminOnly, toggleStock);
+router.patch("/:id/stock", auth, adminOnly, toggleStock);//to change the order status 
 
 
 module.exports = router;
